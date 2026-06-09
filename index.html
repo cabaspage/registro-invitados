@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Años Andy - Confirmación</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="tarjeta-invitacion">
@@ -22,22 +26,24 @@
         </div>
 
         <div class="cuerpo-tarjeta">
-            
+
             <div id="vista-registro" class="vista activa">
-                <p class="instrucciones">¡Hola! Por favor llena los siguientes campos para asegurar tu lugar en este día tan especial.</p>
-                
-                <form id="form-asistencia" action="https://formsubmit.co/ajax/fiestaxvandy@gmail.com" method="POST">
-                    
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="🎉 ¡Nueva asistencia para los XV de Andy!">
+                <p class="instrucciones">¡Hola! Por favor llena los siguientes campos para confirmar tu asistencia en
+                    este día tan especial.</p>
+
+                <form id="form-asistencia"
+                    action="https://script.google.com/macros/s/AKfycby4oNK_Dtq6vsvgXcq5fl_VKbtqG_Y0hmx9uo3IyVFQ-8Obloixkml7viZ1MySI7uYh/exec"
+                    method="POST">
+
+                    <input type="hidden" id="total_personas" name="total">
 
                     <div class="grupo-input">
-                        <label for="nombre">Nombre:</label>
+                        <label for="nombre">Nombre(s):</label>
                         <input type="text" id="nombre" name="nombre" required placeholder="Escribe tu nombre">
                     </div>
 
                     <div class="grupo-input">
-                        <label for="apellido">Apellido:</label>
+                        <label for="apellido">Apellido(s):</label>
                         <input type="text" id="apellido" name="apellido" required placeholder="Escribe tu apellido">
                     </div>
 
@@ -62,30 +68,33 @@
                 <div class="icono-exito">
                     <i class="fa-solid fa-circle-check"></i>
                 </div>
-                <h2 class="titulo-gracias">¡Registro Confirmado!</h2>
-                <p class="instrucciones">Tu asistencia ha sido guardada con éxito. ¡Estamos muy emocionados de festejar contigo!</p>
+
+                <h2 class="titulo-gracias">¡Muchas Gracias por Confirmar!</h2>
+                <p class="instrucciones">
+                    Tu asistencia ha sido registrada con éxito. Nos hace muy felices saber que nos acompañarás en este
+                    día tan especial e inolvidable. ¡Te esperamos!
+                </p>
 
                 <hr class="separador">
 
                 <h3 class="titulo-seccion">📍 ¿Cómo llegar al salón?</h3>
                 <div class="contenedor-botones-grid">
-                    <a href="https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico" target="_blank" class="btn btn-mapa gmaps">
+                    <a href="https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico" target="_blank"
+                        class="btn btn-mapa gmaps">
                         <i class="fa-solid fa-map-location-dot"></i> Google Maps
                     </a>
-                    <a href="https://waze.com/ul?q=Palacio+de+Bellas+Artes+Mexico" target="_blank" class="btn btn-mapa waze">
+                    <a href="https://waze.com/ul?q=Palacio+de+Bellas+Artes+Mexico" target="_blank"
+                        class="btn btn-mapa waze">
                         <i class="fa-brands fa-waze"></i> Waze
                     </a>
                 </div>
 
                 <hr class="separador">
 
-                <h3 class="titulo-seccion">📱 Guardar o Compartir Ubicación</h3>
-                <div class="contenedor-botones-grid">
+                <h3 class="titulo-seccion">📱 Compartir Ubicación</h3>
+                <div class="contenedor-boton-unico">
                     <a id="share-whatsapp" href="#" target="_blank" class="btn btn-compartir whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> Por WhatsApp
-                    </a>
-                    <a id="share-email" href="#" class="btn btn-compartir correo">
-                        <i class="fa-solid fa-envelope"></i> Por Correo
+                        <i class="fa-brands fa-whatsapp"></i> Compartir por WhatsApp
                     </a>
                 </div>
             </div>
@@ -95,4 +104,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -12,29 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const direccionTexto = "Salón Jardín Esmeralda, Av. de la Paz 123, Ciudad de México";
     const enlaceMaps = "https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico";
 
-    // --- GENERA ENLACES DE COMPARTIR DINÁMICAMENTE ---
-    // Enlace estructurado para WhatsApp
+    // --- GENERA ENLACE DE COMPARTIR PARA WHATSAPP ---
+    // Al no poner el parámetro 'phone', WhatsApp abrirá la lista de contactos del invitado
     const textoWhatsApp = encodeURIComponent(`¡Hola! Aquí tienes la ubicación para los XV Años de Andy 🎉:\n📍 ${direccionTexto}\n👉 Enlace de Maps: ${enlaceMaps}`);
     document.getElementById("share-whatsapp").href = `https://api.whatsapp.com/send?text=${textoWhatsApp}`;
 
-    // Enlace estructurado para Correo Nativo (mailto)
-    const asuntoEmail = encodeURIComponent("Ubicación de los XV Años de Andy 🎉");
-    const cuerpoEmail = encodeURIComponent(`¡Hola!\n\nTe comparto la ubicación para asistir a los XV Años de Andy:\n\n📍 Lugar: ${direccionTexto}\n🗺️ Ver en mapa: ${enlaceMaps}\n\n¡Nos vemos pronto!`);
-    document.getElementById("share-email").href = `mailto:?subject=${asuntoEmail}&body=${cuerpoEmail}`;
-
-
+    
     // --- VALIDACIÓN EN TIEMPO REAL (SOLO LETRAS Y ESPACIOS) ---
     function validarSoloLetras(evento) {
         const caracter = evento.key;
-        
+
         // Permite comandos del sistema como borrar (Backspace) o saltar campo (Tab)
         if (evento.ctrlKey || evento.altKey || caracter.length > 1) {
             return;
         }
-        
+
         // Expresión regular que aprueba abecedario completo, espacios y acentos
         const patronLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$/;
-        
+
         // Si no cumple el patrón, cancelamos la escritura en el input
         if (!patronLetras.test(caracter)) {
             evento.preventDefault();
@@ -47,45 +42,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- ENVÍO ASÍNCRONO DEL FORMULARIO (AJAX / FETCH) ---
     formulario.addEventListener("submit", function (evento) {
-        evento.preventDefault(); // Detiene por completo la redirección tradicional del navegador
+        evento.preventDefault(); // Detiene la redirección tradicional
 
-        // Doble validación estricta por seguridad (por si el usuario pegó texto inválido con mouse)
+        // Doble validación de letras para el nombre y apellido
         const patronLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$/;
         if (!patronLetras.test(inputNombre.value) || !patronLetras.test(inputApellido.value)) {
             alert("Por favor, introduce nombres y apellidos válidos (solo letras).");
             return;
         }
 
-        // Interfaz de carga: deshabilitamos botón para evitar dobles clics accidentales
+        // ==========================================
+        // 🔥 NUEVA LÓGICA: CÁLCULO DEL TOTAL DE INVITADOS
+        // ==========================================
+        const campoAcompanantes = document.getElementById("acompanantes");
+        const campoTotalOculto = document.getElementById("total_personas");
+
+        // El titular cuenta como 1, y le sumamos el valor del select convertido a número entero
+        const cantidadAcompanantes = parseInt(campoAcompanantes.value, 10);
+        const sumaTotal = 1 + cantidadAcompanantes;
+
+        // Inyectamos el resultado en el campo oculto con un texto claro para tu correo
+        campoTotalOculto.value = `${sumaTotal} persona(s) en total (1 titular + ${cantidadAcompanantes} acompañante/s)`;
+        // ==========================================
+
+        // Interfaz de carga
         btnSubmit.disabled = true;
         textoBtn.innerText = "Registrando...";
 
-        // Extraemos los datos del formulario y la dirección de destino
         const urlDestino = formulario.action;
         const datosFormulario = new FormData(formulario);
 
-       // Envío asíncrono hacia internet
+        // Envío asíncrono hacia internet
         fetch(urlDestino, {
             method: 'POST',
-            body: datosFormulario,
-            headers: {
-                'Accept': 'application/json'
-            }
+            body: datosFormulario
         })
-        .then(response => {
-            // Evaluamos si el servidor recibió los datos con éxito (códigos del 200 al 299)
-            if (response.status >= 200 && response.status < 300) {
-                // ÉXITO: Ocultamos registro y mostramos gracias
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === "success") {
+                // ÉXITO: Mostramos pantalla de agradecimiento
                 vistaRegistro.classList.remove("activa");
                 vistaGracias.classList.add("activa");
             } else {
-                throw new Error("Error en el servidor");
+                throw new Error("Error al guardar en Excel");
             }
         })
         .catch(error => {
             console.error(error);
-            // Si el correo ya te llega pero el navegador se confunde por seguridad (CORS),
-            // de igual forma enviamos al invitado a la pantalla de éxito para no asustarlo.
+            // Falso positivo de red: si llegó el dato pero el navegador se confunde,
+            // pasamos al invitado al éxito igual para no asustarlo
             vistaRegistro.classList.remove("activa");
             vistaGracias.classList.add("activa");
         });

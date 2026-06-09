@@ -157,7 +157,7 @@ body {
 /* --- ESTILOS DE LA PANTALLA "GRACIAS" --- */
 .icono-exito {
     font-size: 60px;
-    color: #d4af37;
+    color: #009b08;
     margin-bottom: 15px;
     text-align: center;
     animation: rebote 1s ease;
@@ -170,7 +170,7 @@ body {
 
 .titulo-gracias {
     font-family: 'Playfair Display', serif;
-    color: #5c4a4a;
+    color: #4a5c52;
     font-size: 24px;
     text-align: center;
     margin-bottom: 10px;
@@ -212,3 +212,8 @@ body {
 .whatsapp:hover { background-color: #128c7e; transform: translateY(-2px); }
 .correo { background-color: #ea4335; }
 .correo:hover { background-color: #c5221f; transform: translateY(-2px); }
+/* Estilo para que el botón de compartir ocupe todo el ancho */
+.contenedor-boton-unico {
+    width: 100%;
+    margin-bottom: 20px;
+}
