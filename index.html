@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años Andy - Confirmación</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="tarjeta-invitacion">
+        <div class="banner-xv">
+            <p class="subtitulo-banner">Mis XV Años</p>
+            <h1>Andy</h1>
+        </div>
+
+        <div class="cuerpo-tarjeta">
+            
+            <div id="vista-registro" class="vista activa">
+                <p class="instrucciones">¡Hola! Por favor llena los siguientes campos para asegurar tu lugar en este día tan especial.</p>
+                
+                <form id="form-asistencia" action="https://formsubmit.co/ajax/fiestaxvandy@gmail.com" method="POST">
+                    
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="🎉 ¡Nueva asistencia para los XV de Andy!">
+
+                    <div class="grupo-input">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Escribe tu nombre">
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" name="apellido" required placeholder="Escribe tu apellido">
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="acompanantes">¿Cuántos acompañantes llevas? (Máx. 4):</label>
+                        <select id="acompanantes" name="acompanantes" required>
+                            <option value="0">Ninguno (Iré solo/a)</option>
+                            <option value="1">1 Acompañante</option>
+                            <option value="2">2 Acompañantes</option>
+                            <option value="3">3 Acompañantes</option>
+                            <option value="4">4 Acompañantes</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="btn-submit" class="btn btn-principal">
+                        <i class="fa-solid fa-heart"></i> <span id="texto-btn">Confirmar Asistencia</span>
+                    </button>
+                </form>
+            </div>
+
+            <div id="vista-gracias" class="vista">
+                <div class="icono-exito">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h2 class="titulo-gracias">¡Registro Confirmado!</h2>
+                <p class="instrucciones">Tu asistencia ha sido guardada con éxito. ¡Estamos muy emocionados de festejar contigo!</p>
+
+                <hr class="separador">
+
+                <h3 class="titulo-seccion">📍 ¿Cómo llegar al salón?</h3>
+                <div class="contenedor-botones-grid">
+                    <a href="https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico" target="_blank" class="btn btn-mapa gmaps">
+                        <i class="fa-solid fa-map-location-dot"></i> Google Maps
+                    </a>
+                    <a href="https://waze.com/ul?q=Palacio+de+Bellas+Artes+Mexico" target="_blank" class="btn btn-mapa waze">
+                        <i class="fa-brands fa-waze"></i> Waze
+                    </a>
+                </div>
+
+                <hr class="separador">
+
+                <h3 class="titulo-seccion">📱 Guardar o Compartir Ubicación</h3>
+                <div class="contenedor-botones-grid">
+                    <a id="share-whatsapp" href="#" target="_blank" class="btn btn-compartir whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Por WhatsApp
+                    </a>
+                    <a id="share-email" href="#" class="btn btn-compartir correo">
+                        <i class="fa-solid fa-envelope"></i> Por Correo
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
